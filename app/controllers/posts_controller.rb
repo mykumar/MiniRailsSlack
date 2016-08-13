@@ -21,7 +21,7 @@ class PostsController < ApplicationController
         redirect_to home_path, notice: "Post was successfully created!"
       else
         render :new, notice: "Error: Post Not Saved!"
-    end
+      end
   end
 
   def update
