@@ -1,3 +1,3 @@
 # MiniRailsSlack
-Project
+Projects
 Mini Slack Build in Rails
