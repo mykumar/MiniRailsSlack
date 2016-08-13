@@ -1,0 +1,19 @@
+language: ruby
+rvm:
+- 2.3.0
+addons:
+  postgresql: '9.4'
+before_script:
+- psql -c 'create database travis_ci_test;' -U postgres
+- cp config/database.yml.travis config/database.yml
+deploy:
+  provider: heroku
+  api_key:
+    secure: i9EMxhT11nkSNP4eATNNBl3D9eNaZQlzGZIavVmBcVr4QLH1kDFUrYHCA6/q+v672HDk9il1FsBYJVwBmHg6uOetbw0W6pBme1aiPfGL3lmVOFFdAAsL1+XKDCdbitpICZiACsX8WPs3jUR2DUz8tpuOz5HxPMrnGqwvkHNz7toDp3tq3OAMSprb6wxCKTc1fTk9KH/0qMyDTuOPq7Zxx57M7GlrfUXk94gCOKgeb1Nrn6RkrOUFbvjaRcHOiQU5uG6af2T09FtAx5IZGMGJ0/3WRsmi09SFYGXEfh5us8JXwxz2XxmBRlQ6kOfQn1S2E4aPBtsCMe5Hk3FesBGPUeC22TgdZ7gJSDP4OIdnDI9wrSBC3rE6GeNoEOaSqmc02RkMFS+inOdtX1RgHXWjncbnIuGZT1af5zzDB/9q9e3qwCmzVb/D+DlGXMDuhc2qShwHPgRjScMMpLlv43fJvn/y1eQdQxaWYwZ1DRPked0LIjLQfhsRB4Axf9HIcSZK4fhasop6+KjUvQrLA3yqJaUNFj1Wix1NV/mFDLvms8dsmoLHSYxM06UTCHj91BXklsRpsCeqk5xMTqvIpZoABIx6bMIJ/ybAOU88m6Wq2l1HRsneNT3aaZ4t6PWEk0L+c41K6vn4X2d8RNdCAstDKrLa3uifBa8eT+4VEcPSZY8=
+  app: critter-it
+  on:
+    repo: smileofninja/MiniRailsSlack
+    branch: Travis
+  run:
+  - rake db:migrate
+  - rake cleanup
